@@ -21,9 +21,10 @@ int _putchar(char c)
  *
  * Return: void
  */
-void op_char(void *c)
+int op_char(int c)
 {
-	_putchar(*((char *)c));
+	_putchar(c);
+	return (1);
 }
 
 /**
@@ -33,14 +34,15 @@ void op_char(void *c)
  * Return: void
  */
 
-void op_str(void *c)
+int op_str(char *c)
 {
-	unsigned int i, len;
+	unsigned int i = 0, len;
 
 	len = strlen(c);
 	while (i < len)
 	{
-		_putchar(*(((char *)c) + i));
+		_putchar(c[i]);
 		i++;
 	}
+	return (i + 1);
 }

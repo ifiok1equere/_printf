@@ -2,84 +2,45 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-
 /**
  * _printf - function prints
  * @format: pointer to string to be printed.
- *
  * Return: integer
  */
 int _printf(const char *format, ...)
 {
-	unsigned int len, i, u;
-	void *c;
-	const char *ptr;
-	char *str;
-	void (*op)(void *);
+	unsigned int i, reton = 0;
 	va_list arg;
-	ops_p ops[] = {{'c', op_char},{'s', op_str},
-		{'%', op_percent},{'d', op_int}};
 
 	if (format == NULL)
-		exit(-1);
-
-	ptr = format;
-	len = strlen(ptr);
+		return (0);
 	va_start(arg, format);
-	for (i = 0; i < len; i++)
+	for (i = 0; i < strlen(format); i++)
 	{
-		if (ptr[i] == '%')
+		if (format[i] == '%')
 		{
-			if (ptr[i + 1] == ops[0].a)
+			if (format[i + 1] == 'c')
 			{
-				c = va_arg(arg, void *);
-				op = ops[0].f;
-				op(&c);
+				reton += op_char(va_arg(arg, int));
 			}
-			else if (ptr[i + 1] == ops[1].a)
+			else if (format[i + 1] == 's')
 			{
-				str = va_arg(arg, void *);
-				op = ops[1].f;
-				op((void *)str);
+				reton += op_str(va_arg(arg, char *));
 			}
-			else if (ptr[i + 1] == ops[2].a)
+			else if (format[i + 1] == '%')
 			{
-				op = ops[2].f;
-				op("%");
-			}
-			else if (ptr[i + 1] == ops[3].a)
-			{
-				c = va_arg(arg, void *);
-				op = ops[0].f;
-				op(&c);
-			}
-			else if (ptr[i + 1] == 'b')
-			{
-				u = va_arg(arg, unsigned int);
-				op_bin(u);
-			}
-			else if (ptr[i + 1] == 'u')
-			{
-				u = va_arg(arg, unsigned int);
-				op_uint(u);
-			}
-			else if (ptr[i + 1] == 'o')
-			{
-				u = va_arg(arg, unsigned int);
-				op_oct(u);
+				_putchar('%');
+				reton++;
 			}
 			i += 2;
 		}
-		if (ptr[i] != '%')
+		if (format[i] != '%')
 		{
-			_putchar(ptr[i]);
+			_putchar(format[i]);
+			reton++;
 		}
 		else
-		{
 			i--;
-		}
 	}
-	return (0);
+	return (reton);
 }

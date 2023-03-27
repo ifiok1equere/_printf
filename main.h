@@ -17,9 +17,8 @@ typedef struct ops
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-void op_char(void *);
-void op_str(void *);
-void op_percent(void *);
+int op_char(int);
+int op_str(char *);
 void op_int(void *);
 void op_bin(unsigned int n);
 void op_uint(unsigned int n);
