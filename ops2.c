@@ -2,7 +2,7 @@
 
 /**
  * op_bin - convert decimal to binary
- * @c: decimal number to be converted.
+ * @n: decimal number to be converted.
  *
  * Return: void
  */

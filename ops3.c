@@ -55,7 +55,7 @@ void op_hex(unsigned int n)
 	while (n != 0)
 	{
 		rem = n % 16;
-		if(rem < 10)
+		if (rem < 10)
 		{
 			arr[i] = rem + 48;
 			i++;
