@@ -15,7 +15,6 @@ typedef struct ops
 	void (*f)(void *);
 } ops_p;
 
-int _putchar(char c);
 int _printf(const char *format, ...);
 int op_char(int);
 int op_str(char *);

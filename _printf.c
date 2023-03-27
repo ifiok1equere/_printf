@@ -2,6 +2,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdio.h>
 /**
  * _printf - function prints
  * @format: pointer to string to be printed.
@@ -23,24 +25,24 @@ int _printf(const char *format, ...)
 			{
 				reton += op_char(va_arg(arg, int));
 			}
-			else if (format[i + 1] == 's')
+			if (format[i + 1] == 's')
 			{
 				reton += op_str(va_arg(arg, char *));
 			}
-			else if (format[i + 1] == '%')
+			if (format[i + 1] == '%')
 			{
-				_putchar('%');
+				write(1, "%", 1);
 				reton++;
 			}
 			i += 2;
 		}
 		if (format[i] != '%')
 		{
-			_putchar(format[i]);
+			write(1, &format[i], 1);
 			reton++;
 		}
 		else
 			i--;
 	}
-	return (reton);
+	return (reton - 1);
 }
