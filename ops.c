@@ -11,8 +11,7 @@
 int op_char(int c)
 {
 	unsigned char a = c;
-	if (!c)
-		return (-1);
+
 	return (write(1, &a, 1));
 }
 
