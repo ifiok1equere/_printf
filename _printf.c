@@ -1,56 +1,47 @@
 #include "main.h"
-#include <stdarg.h>
-#include <string.h>
-#include <unistd.h>
 /**
- * _printf - function prints
- * @format: pointer to string to be printed.
- * Return: integer
- */
+* _printf - main function to print in console
+* @format: array to print and check type
+* Return: count of character printed
+**/
 int _printf(const char *format, ...)
 {
-	unsigned int reton = 0;
-	va_list arg;
+	int count = -1;
 
-	if (format == NULL)
-		return (-1);
-	va_start(arg, format);
-	while (*format != '\0')
+	if (format != NULL)
 	{
-		if (*format == '%')
+		int i;
+		va_list ar_list;
+		int (*o)(va_list);
+
+		va_start(ar_list, format);
+
+		if (format[0] == '%' && format[1] == '\0')
+			return (-1);
+
+		count = 0;
+
+		for (i = 0; format[i] != '\0'; i++)
 		{
-			format++;
-			if (*format == 'c')
+			if (format[i] == '%')
 			{
-				reton += op_char(va_arg(arg, int));
-				format++;
-			}
-			else if (*format == 's')
-			{
-				reton += op_str(va_arg(arg, char *));
-				format++;
-			}
-			else if (*format == '%')
-			{
-				write(1, "%", 1);
-				reton++;
-				format++;
+				if (format[i + 1] == '%')
+				{
+					count += _putchar(format[i]);
+					i++;
+				}
+				else if (format[i + 1] != '\0')
+				{
+					o = get_func(format[i + 1]);
+					count += (o ? o(ar_list) : _putchar(format[i]) + _putchar(format[i + 1]));
+					i++;
+				}
 			}
 			else
-			{
-				write(1, "%", 1);
-				write(1, format, 1);
-				reton += 2;
-				format++;
-			}
+				count += _putchar(format[i]);
 		}
-		else
-		{
-			write(1, format, 1);
-			format++;
-			reton++;
-		}
+		va_end(ar_list);
 	}
-	va_end(arg);
-	return (reton);
+
+	return (count);
 }
