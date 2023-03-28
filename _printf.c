@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdio.h>
 /**
  * _printf - function prints
  * @format: pointer to string to be printed.
@@ -15,7 +14,7 @@ int _printf(const char *format, ...)
 	va_list arg;
 
 	if (format == NULL)
-		return (0);
+		return (-1);
 	va_start(arg, format);
 	while (*format != '\0')
 	{
@@ -46,6 +45,5 @@ int _printf(const char *format, ...)
 		format++;
 	}
 	va_end(arg);
-	printf("%d\n", reton);
 	return (reton);
 }
