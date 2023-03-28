@@ -1,29 +1,34 @@
-#ifndef MAIN_H
-#define MAIN_H
-/**
- * struct ops - structure for printing
- * @a: character representing format specifier
- * @f: pointer to printing function based on specifier
- *
- * Description: This structure forms is designed to allow for printing to std
- * output based on modifier passed to function.
- */
+#ifndef _MAIN_
+#define _MAIN_
 
-typedef struct ops
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <limits.h>
+
+/**
+* struct op - flag / function object
+* @c: flag
+* @f: function
+*/
+
+typedef struct op
 {
-	char a;
-	void (*f)(void *);
-} ops_p;
+	char *c;
+	int (*f)(va_list);
+} op_t;
 
 int _printf(const char *format, ...);
-int _printf1(const char *format, ...);
-int op_char(int);
-int op_str(char *);
-char * itoa(int, char *, int);
-int op_int(int);
-void op_bin(unsigned int n);
-void op_uint(unsigned int n);
-void op_oct(unsigned int n);
-void op_hex(unsigned int n);
+int _putchar(char c);
+int print_c(va_list ar_list);
+int (*get_func(char s))(va_list ar_list);
+int print_s(va_list ar_list);
+int print_d(va_list ar_list);
+int print_i(va_list ar_numlist);
+int print_b(va_list binary_list);
+int print_u(va_list ar_list);
+int print_o(va_list ar_list);
+int print_x(va_list ar_list);
+int print_X(va_list ar_list);
 
-#endif /* #ifndef MAIN_H */
+#endif
