@@ -19,7 +19,7 @@ int _printf(const char *format, ...);
 int _printf1(const char *format, ...);
 int op_char(int);
 int op_str(char *);
-void iota(int, char *);
+char * itoa(int, char *, int);
 int op_int(int);
 void op_bin(unsigned int n);
 void op_uint(unsigned int n);
