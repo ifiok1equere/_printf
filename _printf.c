@@ -21,7 +21,6 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-
 			if (*format == 'c')
 			{
 				reton += op_char(va_arg(arg, int));
@@ -41,8 +40,8 @@ int _printf(const char *format, ...)
 				format--;
 		}
 		write(1, format, 1);
-		reton++;
 		format++;
+		reton++;
 	}
 	va_end(arg);
 	return (reton);

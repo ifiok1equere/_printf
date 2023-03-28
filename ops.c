@@ -23,12 +23,12 @@ int op_char(int c)
  */
 int op_str(char *c)
 {
-	unsigned int i = 0, len;
+	unsigned int i = 0;
 
-	len = strlen(c);
-	while (i < len)
+	while (*c != '\0')
 	{
-		write(1, &c[i], 1);
+		write(1, c, 1);
+		c++;
 		i++;
 	}
 	return (i);
