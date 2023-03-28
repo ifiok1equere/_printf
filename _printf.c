@@ -1,5 +1,4 @@
 #include <stdarg.h>
-<<<<<<< HEAD
 #include <string.h>
 #include <unistd.h>
 /**
