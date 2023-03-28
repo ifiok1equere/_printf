@@ -11,38 +11,41 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int i, reton = 0;
+	unsigned int reton = 0;
 	va_list arg;
 
 	if (format == NULL)
 		return (0);
 	va_start(arg, format);
-	for (i = 0; i < strlen(format); i++)
+	while (*format != '\0')
 	{
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			if (format[i + 1] == 'c')
+			format++;
+
+			if (*format == 'c')
 			{
 				reton += op_char(va_arg(arg, int));
 			}
-			if (format[i + 1] == 's')
+			else if (*format == 's')
 			{
 				reton += op_str(va_arg(arg, char *));
 			}
-			if (format[i + 1] == '%')
+			else if (*format == '%')
 			{
 				write(1, "%", 1);
 				reton++;
 			}
-			i += 2;
+			if (*format == 'c' || *format == 's' || *format == '%')
+				format++;
+			else
+				format--;
 		}
-		if (format[i] != '%')
-		{
-			write(1, &format[i], 1);
-			reton++;
-		}
-		else
-			i--;
+		write(1, format, 1);
+		reton++;
+		format++;
 	}
-	return (reton - 1);
+	va_end(arg);
+	printf("%d\n", reton);
+	return (reton);
 }

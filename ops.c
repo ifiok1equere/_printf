@@ -10,7 +10,8 @@
  */
 int op_char(int c)
 {
-	return (write(1, &c, 1));
+	unsigned char a = c;
+	return (write(1, &a, 1));
 }
 
 /**
