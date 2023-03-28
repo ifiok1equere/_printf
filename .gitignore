@@ -1,3 +1,8 @@
 [012345]-main.c
 p
 test.c
+_printf1.c 
+binary.c
+iota.c
+ops1.c
+ops2.c

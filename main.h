@@ -16,9 +16,11 @@ typedef struct ops
 } ops_p;
 
 int _printf(const char *format, ...);
+int _printf1(const char *format, ...);
 int op_char(int);
 int op_str(char *);
-void op_int(void *);
+void iota(int, char *);
+int op_int(int);
 void op_bin(unsigned int n);
 void op_uint(unsigned int n);
 void op_oct(unsigned int n);

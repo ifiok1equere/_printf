@@ -24,24 +24,33 @@ int _printf(const char *format, ...)
 			if (*format == 'c')
 			{
 				reton += op_char(va_arg(arg, int));
+				format++;
 			}
 			else if (*format == 's')
 			{
 				reton += op_str(va_arg(arg, char *));
+				format++;
 			}
 			else if (*format == '%')
 			{
 				write(1, "%", 1);
 				reton++;
-			}
-			if (*format == 'c' || *format == 's' || *format == '%')
 				format++;
+			}
 			else
-				format--;
+			{
+				write(1, "%", 1);
+				write(1, format, 1);
+				reton += 2;
+				format++;
+			}
 		}
-		write(1, format, 1);
-		format++;
-		reton++;
+		else
+		{
+			write(1, format, 1);
+			format++;
+			reton++;
+		}
 	}
 	va_end(arg);
 	return (reton);
