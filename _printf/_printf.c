@@ -1,14 +1,11 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
+
 /**
  * _printf - function prints
  * @format: pointer to string to be printed.
  * Return: integer
  */
+
 int _printf(const char *format, ...)
 {
 	unsigned int i, reton = 0;
