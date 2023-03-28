@@ -1,47 +1,58 @@
+#include <stdarg.h>
 #include "main.h"
-/**
-* _printf - main function to print in console
-* @format: array to print and check type
-* Return: count of character printed
-**/
-int _printf(const char *format, ...)
-{
-	int count = -1;
+#include <stdio.h>
 
-	if (format != NULL)
-	{
-		int i;
-		va_list ar_list;
-		int (*o)(va_list);
+int _printf(const char *format, ...){
+  int count = 0, i;
+  
+  va_list data;
+  va_start(data, format);
 
-		va_start(ar_list, format);
+  /* _printf("%s", 'Hello') */
+  
+  for (i = 0; format[i] != '\0'; ){
+    
+    /* count the number of characters */
+    /* print to the screen each character counted */
+    if (format[i] != '%'){
+      count += _putchar(format[i]);
+      i++;
+    }
+    else if (format[i] == '%' && format[i+1] !=' '){
+      switch (format[i + 1]){
+        case 'c':
+            /* print the character from the va_arguments */
+            count += _putchar(va_arg(data, int));
+            break;
+        case 's':
+            count += print_string(va_arg(data, char *));
+            break;
+        case '%':
+            /* print the character from the va_arguments */
+            count += _putchar('%');
+            break;
+        case 'd':
+            count += print_decimal(va_arg(data, int));
+            break;
+        case 'i':
+            count += print_decimal(va_arg(data, int));
+            break;
+        case 'b':
+            count += print_binary(va_arg(data, int));
+            break;
+        case 'u':
+            count += print_unsigned(va_arg(data, unsigned int));
+            break;
+        default:
+            break;
+      }
+      
+      i += 2;
+    }
+    
+    
+  }
+  
 
-		if (format[0] == '%' && format[1] == '\0')
-			return (-1);
-
-		count = 0;
-
-		for (i = 0; format[i] != '\0'; i++)
-		{
-			if (format[i] == '%')
-			{
-				if (format[i + 1] == '%')
-				{
-					count += _putchar(format[i]);
-					i++;
-				}
-				else if (format[i + 1] != '\0')
-				{
-					o = get_func(format[i + 1]);
-					count += (o ? o(ar_list) : _putchar(format[i]) + _putchar(format[i + 1]));
-					i++;
-				}
-			}
-			else
-				count += _putchar(format[i]);
-		}
-		va_end(ar_list);
-	}
-
-	return (count);
+  return (count);
 }
