@@ -11,7 +11,8 @@
 int op_char(int c)
 {
 	unsigned char a = c;
-
+	if (!c)
+		return (-1);
 	return (write(1, &a, 1));
 }
 
@@ -25,6 +26,8 @@ int op_str(char *c)
 {
 	unsigned int i = 0;
 
+	if (c == NULL)
+		return (-1);
 	while (*c != '\0')
 	{
 		write(1, c, 1);
