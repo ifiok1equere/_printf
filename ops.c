@@ -11,6 +11,7 @@
 int op_char(int c)
 {
 	unsigned char a = c;
+
 	return (write(1, &a, 1));
 }
 
