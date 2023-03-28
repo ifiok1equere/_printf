@@ -10,7 +10,9 @@
  */
 int op_char(int c)
 {
-	return (write(1, &c, 1));
+	unsigned char a = c;
+
+	return (write(1, &a, 1));
 }
 
 /**
@@ -21,12 +23,14 @@ int op_char(int c)
  */
 int op_str(char *c)
 {
-	unsigned int i = 0, len;
+	unsigned int i = 0;
 
-	len = strlen(c);
-	while (i < len)
+	if (c == NULL)
+		return (-1);
+	while (*c != '\0')
 	{
-		write(1, &c[i], 1);
+		write(1, c, 1);
+		c++;
 		i++;
 	}
 	return (i);
